@@ -14,7 +14,14 @@ namespace Yafn.Parser.Layouts {
 			length = reader.ReadInt32();
 			line = reader.ReadInt32();
 			column = reader.ReadInt32();
+		}
 
+		public void Write(BinaryWriter writer) {
+			writer.Writer(sourceFileIndex);
+			writer.Writer(position);
+			writer.Writer(length);
+			writer.Writer(line);
+			writer.Writer(column);
 		}
 	}
 }

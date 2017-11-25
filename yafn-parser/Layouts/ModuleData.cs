@@ -48,5 +48,27 @@ namespace Yafn.Parser.Layouts {
 
 			strings = Utils.ReadArray<StringLayout>(reader, stringsCount);
 		}
+
+		public void Write(BinaryWriter writer) {
+			writer.Write(sectionsCount);
+			writer.Write(symbolsCount);
+			writer.Write(sourceFilesCount);
+			writer.Write(sourceTextRangesCount);
+			writer.Write(sourceCodePointsCount);
+			writer.Write(blobsCount);
+			writer.Write(stringsCount);
+
+			Utils.WriteArray(writer, sections);
+			Utils.WriteArray(writer, symbols);
+			Utils.WriteArray(writer, sourceFiles);
+			Utils.WriteArray(writer, sourceTextRanges);
+			Utils.WriteArray(writer, sourceCodePoints);
+
+			for (int i = 0; i < blobsCount; i++) {
+				blobs[i].Write(writer);
+			}
+
+			Utils.WriteArray(writer, strings);
+		}
 	}
 }

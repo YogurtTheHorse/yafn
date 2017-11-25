@@ -17,5 +17,14 @@ namespace Yafn.Parser.Layouts {
 			customSectionNameIndex = reader.ReadInt32();
 			accessMode = (SectionAccessMode)reader.ReadInt16();
 		}
+
+		public void Write(BinaryWriter writer) {
+			writer.Write(blobIndex);
+			writer.Write(bankNameIndex);
+			writer.Write(startAddress);
+			writer.Write((short)kind);
+			writer.Write(customSectionNameIndex);
+			writer.Write((short)accessMode);
+		}
 	}
 }

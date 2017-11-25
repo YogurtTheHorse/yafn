@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Yafn.Parser.Layouts {
 	public struct ModuleLayout : ISimpleLayout {
@@ -19,6 +18,11 @@ namespace Yafn.Parser.Layouts {
 			}
 
 			return module;
+		}
+
+		public void Write(BinaryWriter writer) {
+			header.Write(writer);
+			data.Write(writer);
 		}
 	}
 }

@@ -15,5 +15,13 @@ namespace Yafn.Parser.Layouts  {
 			platformVersion = reader.ReadInt32();
 			entryPoint = reader.ReadInt64();
 		}
+
+		public void Write(BinaryWriter writer) {
+			signature.Write(writer);
+			writer.Write(formatVersion);
+			writer.Write(platformNameIndex);
+			writer.Write(platformVersion);
+			writer.Write(entryPoint);
+		}
 	}
 }

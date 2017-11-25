@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Yafn.Parser.Layouts;
 
 namespace Yafn.Parser {
@@ -11,6 +12,12 @@ namespace Yafn.Parser {
 			}
 
 			return res;
+		}
+
+		public static void WriteArray(BinaryWriter writer, ILayout[] layouts) {
+			foreach (ILayout l in layouts) {
+				l.Write(writer);
+			}
 		}
 	}
 }

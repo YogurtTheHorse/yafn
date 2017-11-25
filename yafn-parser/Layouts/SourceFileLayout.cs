@@ -9,5 +9,10 @@ namespace Yafn.Parser.Layouts {
 			fileNameIndex = reader.ReadInt32();
 			sha256hashBytesIndex = reader.ReadInt32();
 		}
+
+		public void Write(BinaryWriter writer) {
+			writer.Write(fileNameIndex);
+			writer.Write(sha256hashBytesIndex);
+		}
 	}
 }

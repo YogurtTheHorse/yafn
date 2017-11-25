@@ -19,5 +19,12 @@ namespace Yafn.Parser.Layouts {
 		public override string ToString() {
 			return str;
 		}
+
+		public void Write(BinaryWriter writer) {
+			writer.Write(strLength);
+			foreach (char c in str) {
+				writer.Write((byte)c);
+			}
+		}
 	}
 }

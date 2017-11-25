@@ -9,5 +9,10 @@ namespace Yafn.Parser.Layouts {
 			address = reader.ReadInt64();
 			sourceOperationRangeIndex = reader.ReadInt32();
 		}
+
+		public void Write(BinaryWriter writer) {
+			writer.Write(address);
+			writer.Write(sourceOperationRangeIndex);
+		}
 	}
 }

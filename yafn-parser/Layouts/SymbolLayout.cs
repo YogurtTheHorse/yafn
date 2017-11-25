@@ -11,5 +11,11 @@ namespace Yafn.Parser.Layouts {
 			blobEntryIndex = reader.ReadInt64();
 			nameIndex = reader.ReadInt32();
 		}
+
+		public void Write(BinaryWriter writer) {
+			writer.Write(sectionIndex);
+			writer.Write(blobEntryIndex);
+			writer.Write(nameIndex);
+		}
 	}
 }

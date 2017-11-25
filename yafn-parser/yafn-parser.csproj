@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Layouts\ILayout.cs" />
     <Compile Include="Layouts\ISimpleLayout.cs" />
     <Compile Include="Layouts\BlobLayout.cs" />
     <Compile Include="Layouts\ModuleData.cs" />
