@@ -1,0 +1,72 @@
+﻿namespace yafn.Instructions {
+	public enum Instruction {
+		emp		= 0x0,
+		hlt		= 0x1,
+		brp		= 0x2,
+		wrt		= 0x3,
+		srt		= 0x4,
+
+		/* ---------------- */
+
+		epush	= 0x11,
+		ipush	= 0x12,
+		mpush	= 0x13,
+		cpush	= 0x14,
+		
+		pop		= 0x15,
+		dpl		= 0x16,
+		sav		= 0x17,
+		swp		= 0x18,
+		svs		= 0x19,
+
+		rnd		= 0x1a,
+
+		smpsh	= 0x1b,
+		scpsh	= 0x1c,
+
+		/* ---------------- */
+
+		add		= 0x20,
+		sub		= 0x21,
+		mul		= 0x22,
+		div		= 0x23,
+		
+		neg		= 0x24,
+		inc		= 0x25,
+		dec		= 0x26,
+
+		/* ---------------- */
+
+		bor		= 0x30,
+		band	= 0x31,
+
+		and1	= 0x34,
+		and2	= 0x35,
+		and3	= 0x36,
+		and4	= 0x37,
+
+		lsh		= 0x32,
+		lsh1	= 0x38,
+		lsh2	= 0x39,
+
+		rsh		= 0x33,
+		rsh1	= 0x3c,
+		rsh2	= 0x3d,
+
+		bxor	= 0x3f,
+
+		/* ---------------- */
+
+		cmp		= 0x40,
+		eq		= 0x41,
+		
+		jmp		= 0x44,
+		jez		= 0x45,
+		jnz		= 0x46,
+		
+		call	= 0x47,
+		ret		= 0x48,
+
+		cmp0	= 0x49
+	}
+}

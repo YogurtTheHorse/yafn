@@ -14,7 +14,7 @@ namespace Yafn.Parser {
 			return res;
 		}
 
-		public static void WriteArray(BinaryWriter writer, ILayout[] layouts) {
+		public static void WriteArray<T>(BinaryWriter writer, T[] layouts) where T : ILayout{
 			foreach (ILayout l in layouts) {
 				l.Write(writer);
 			}

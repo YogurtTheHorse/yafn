@@ -1,0 +1,136 @@
+architecture yafn {
+	registers:
+		storage sys_reg[96];
+
+		view ssz = sys_reg[0..32];  														/* stack size */
+		view spn = sys_reg[32..64]; 														/* pointer to stack's beginning */
+		view err = sys_reg[64..96]; 														/* error register */
+
+
+	memory:
+		/* 0xFFFFFFFF because we use 32-bit integers, so it will just fit */
+		range __constants [0x0..0xFFFFFFFF] {
+			cell = 8;
+			endianess = little-endian;
+			granularity = 0;
+		}
+
+		range __data [0x0..0xFFFFFFFF] {
+			cell = 8;
+			endianess = little-endian;
+			granularity = 0;
+		}
+
+		range __stack [0x0..0xFFFFFFFF] {
+			cell = 8;
+			endianess = little-endian;
+			granularity = 0;
+		}
+
+
+		range __code [0x0..0xFFFFFFFF] {
+			cell = 8;
+			endianess = little-endian;
+			granularity = 0;
+		}
+
+	instructions: /* encodings */
+		encode __dat field = immediate[32] data;											/* some integer */
+		encode __off field = immediate[32] offset;											/* offset in memory */
+		encode __lbl field = immediate[32] offset;											/* pointer to instruction */
+
+		encode __reg field = register {
+			ssz = 00,
+			spn = 01,
+			err = 10
+		};
+
+
+	instructions: /* base */
+		instruction emp 	= { 0000 0000 };												/* do nothing */
+		instruction hlt		= { 0000 0001 };												/* exits program */
+		instruction brp		= { 0000 0010 };												/* breakpoint */
+		instruction wrt		= { 0000 0011 };												/* outouts int from stack to console */
+		instruction srt		= { 0000 0100 };												/* sorts last N elements of stack */
+
+
+	instructions: /* stack instructions */
+
+		instruction epush	= { 0001 0001 };												/* pushes error register to stack */
+
+		instruction ipush	= { 0001 0010, __dat as dat };									/* pushes integer to stack */
+		instruction mpush	= { 0001 0011, __off as off };									/* pushes from mem storage to stack */
+		instruction cpush	= { 0001 0100, __off as off };									/* pushes from constants storage to stack */
+
+		/* pop instructions */
+		instruction pop		= { 0001 0101 };												/* discards top value from stack */
+		instruction dpl		= { 0001 0110 };												/* duplicates last element from stack */
+		instruction sav		= { 0001 0111, __off as off };									/* pops data from stack and stores it in memory */
+		instruction swp		= { 0001 1000 };												/* swaps top two values */
+		instruction svs		= { 0001 1001 };												/* pops data and place in memory to save */
+
+		instruction rnd		= { 0001 1010 };												/* pushes to stack random int */
+
+		instruction smpsh	= { 0001 1011 };												/* gets mem_ptr from stack to push fom mem */
+		instruction scpsh	= { 0001 1100 };												/* gets const_ptr from stack to push fom mem */
+
+
+	/* all operations automatically pops top elements, so it's necessary to use `dpl` */
+	instructions: /* arithmetics */
+		instruction add		= { 0010 0000 };												/* adds two top values on stack */
+		instruction sub		= { 0010 0001 };												/* substracts two top values of stack */
+		instruction mul		= { 0010 0010 };												/* multiplies two top values of stack */
+		instruction div		= { 0010 0011 };												/* dividies two top values of stack and pushes to 
+																							   stack result integer division and remainder */
+		instruction neg		= { 0010 0100 };												/* negatives top element of stack */
+		
+		instruction inc		= { 0010 0101 };												/* increments top element of stack */
+		instruction dec		= { 0010 0110 };												/* decrements top element of stack */
+
+
+	mnemonics: /* bitwise ops */
+		instruction bor		= { 0011 0000 };												/* bitwise or */
+
+		instruction band	= { 0011 0001 };												/* bitwise and */
+
+		instruction and1	= { 0011 0100 };												/* bitwise and of top element and 1 */
+		instruction and2	= { 0011 0101 };												/* bitwise and of top element and 2 */
+		instruction and3	= { 0011 0110 };												/* bitwise and of top element and 4 */
+		instruction and4	= { 0011 0111 };												/* bitwise and of top element and 8 */
+
+		instruction lsh		= { 0011 0010 };												/* left shift */
+		instruction lsh1	= { 0011 1000 };												/* shifts top element left on 1 */
+		instruction lsh2	= { 0011 1001 };												/* shifts top element left on 2 */
+
+		instruction rsh		= { 0011 0011 };												/* right shift */
+		instruction rsh1	= { 0011 1100 };												/* shifts top element right on 1 */
+		instruction rsh2	= { 0011 1101 };												/* shifts top element right on 2 */
+
+		instruction bxor	= { 0011 1111 };												/* bitwise xor */
+
+	instructions: /* conditions and jumps */
+		instruction cmp		= { 0100 0000 };												/* compares two elements 
+
+																							    ---------------------
+																							    | state	| pushes	|
+																							    ---------------------
+																							    | ==	| 001		|
+																							    | >=	| 011		|
+																							    | <=	| 101		|
+																							    | >		| 010		|
+																							    | <		| 100		|
+																							    --------------------- 
+
+																							    So, the first bit for equality,
+																							    second one for greatness and
+																							    third one for less */
+
+		instruction eq		= { 0100 0001 };												/* pushes 1 if top values equal, else 0 */
+		instruction jmp		= { 0100 0100, __lbl as lbl };									/* jumps to instruction */
+		instruction jez		= { 0100 0101, __lbl as lbl };									/* jmps to instructions if 0 on stack top */
+		instruction jnz		= { 0100 0110, __lbl as lbl };									/* jmps to instructions if on stack top not 0 */
+		instruction call	= { 0100 0111, __lbl as lbl };									/* jmps to instructions and pushes current cursor to stack */
+
+		instruction ret		= { 0100 1000 };												/* jps to address at stack top and pops */
+		instruction cmp0	= { 0100 1001 };												/* compares with 0 */
+}

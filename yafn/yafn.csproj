@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E5FAB9E2-F656-4C1D-A852-0B38D1F2E1A3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>yafn</RootNamespace>
+    <AssemblyName>yafn</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BinaryDefenitions\Label.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\BlobLayout.cs" />
+    <Compile Include="BinaryDefenitions\IBinaryReadable.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\ModuleData.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\ModuleHeader.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\ModuleLayout.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SectionAccessMode.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SectionKind.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SectionLayout.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SourceCodePointLayout.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SourceFileLayout.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SourceTextRangeLayout.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\StringLayout.cs" />
+    <Compile Include="BinaryDefenitions\Layouts\SymbolLayout.cs" />
+    <Compile Include="BinaryDefenitions\Section.cs" />
+    <Compile Include="BinaryDefenitions\Utils.cs" />
+    <Compile Include="Instructions\Extenstions.cs" />
+    <Compile Include="Instructions\Instruction.cs" />
+    <Compile Include="Instructions\InstructionGroup.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="content\asm_listing.als">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="content\out.ptptb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="content\test.arch">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="content\yafn.arch">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\fib.asm" />
+    <Content Include="content\srt.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\yafn-architect\yafn-architect.csproj">
+      <Project>{6a5c4d26-3302-4168-bd29-14406110fc4c}</Project>
+      <Name>yafn-architect</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
