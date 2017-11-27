@@ -44,5 +44,18 @@ namespace Yafn.Interpreter {
 				}
 			}
 		}
+
+		public Section FindSectionByName(string str) {
+			foreach (Section sec in Sections) {
+				if (sec.Name == str) {
+					return sec;
+				}
+			}
+
+			return new Section() {
+				Name = str
+			};
+		}
+
 	}
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
-using yafn.BinaryDefenitions;
 using Yafn.Architect.Builder;
+using Yafn.Interpreter;
+using Yafn.Parser.Layouts;
 
-namespace yafn {
+namespace Yafn {
 	public class Program {
-		public static ModuleLayout mod;
+		public static ModuleLayout modLayout;
 
 		public static ModuleLayout ReadBin(string path) {
 			ModuleLayout module = new ModuleLayout();
@@ -19,8 +20,9 @@ namespace yafn {
 		
 		public static void Main(string[] args) {
 			Console.WriteLine("Reading module file...");
-			mod = ReadBin("content\\out.ptptb");
-			Console.WriteLine($"Done. Read {mod.header.signature}.");
+			modLayout = ReadBin("content\\out.ptptb");
+			Console.WriteLine($"Done. Read {modLayout.header.signature}.");
+			Module mod = new Module(modLayout);
 
 			Runner.Prepare(mod);
 			Runner.Run();

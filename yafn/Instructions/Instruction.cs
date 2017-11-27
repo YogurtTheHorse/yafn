@@ -1,4 +1,4 @@
-﻿namespace yafn.Instructions {
+﻿namespace Yafn.Instructions {
 	public enum Instruction {
 		emp		= 0x0,
 		hlt		= 0x1,

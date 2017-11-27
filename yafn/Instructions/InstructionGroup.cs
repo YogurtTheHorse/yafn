@@ -1,4 +1,4 @@
-﻿namespace yafn.Instructions {
+﻿namespace Yafn.Instructions {
 	public enum InstructionGroup {
 		Base = 0,
 		Stack = 1,

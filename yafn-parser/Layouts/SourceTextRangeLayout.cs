@@ -17,11 +17,11 @@ namespace Yafn.Parser.Layouts {
 		}
 
 		public void Write(BinaryWriter writer) {
-			writer.Writer(sourceFileIndex);
-			writer.Writer(position);
-			writer.Writer(length);
-			writer.Writer(line);
-			writer.Writer(column);
+			writer.Write(sourceFileIndex);
+			writer.Write(position);
+			writer.Write(length);
+			writer.Write(line);
+			writer.Write(column);
 		}
 	}
 }

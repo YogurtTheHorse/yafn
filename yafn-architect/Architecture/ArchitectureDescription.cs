@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-using Yafn.Architect.Architecture.Memory;
+﻿using Yafn.Architect.Architecture.Memory;
 using Yafn.Architect.Architecture.Registers;
 using Yafn.Architect.Architecture.Instructions;
 using Yafn.Architect.Ext;
+
 using System;
 
 namespace Yafn.Architect.Architecture {

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using yafn.BinaryDefenitions;
-using yafn.Instructions;
 
-namespace yafn {
+using Yafn.Instructions;
+using Yafn.Interpreter;
+
+namespace Yafn {
 	public static class Runner {
 		private static Section codeSection, dataSection, constants;
 		private static byte[] data, code;
@@ -21,7 +22,7 @@ namespace yafn {
 
 		private static Stack<int> stack;
 
-		public static void Prepare(ModuleLayout module) {
+		public static void Prepare(Module module) {
 			Console.WriteLine("Looking for sections");
 
 			codeSection = module.FindSectionByName("__code");
@@ -49,8 +50,8 @@ namespace yafn {
 			cursor = 0;
 
 			foreach (Label l in codeSection.Labels) {
-				if (l.name == "__start") {
-					cursor = (int)l.offset;
+				if (l.Name == "__start") {
+					cursor = (int)l.Offset;
 					break;
 				}
 			}

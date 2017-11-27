@@ -43,22 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryDefenitions\Label.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\BlobLayout.cs" />
-    <Compile Include="BinaryDefenitions\IBinaryReadable.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\ModuleData.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\ModuleHeader.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\ModuleLayout.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SectionAccessMode.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SectionKind.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SectionLayout.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SourceCodePointLayout.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SourceFileLayout.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SourceTextRangeLayout.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\StringLayout.cs" />
-    <Compile Include="BinaryDefenitions\Layouts\SymbolLayout.cs" />
-    <Compile Include="BinaryDefenitions\Section.cs" />
-    <Compile Include="BinaryDefenitions\Utils.cs" />
     <Compile Include="Instructions\Extenstions.cs" />
     <Compile Include="Instructions\Instruction.cs" />
     <Compile Include="Instructions\InstructionGroup.cs" />
@@ -90,6 +74,14 @@
     <ProjectReference Include="..\yafn-architect\yafn-architect.csproj">
       <Project>{6a5c4d26-3302-4168-bd29-14406110fc4c}</Project>
       <Name>yafn-architect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\yafn-interpreter\yafn-interpreter.csproj">
+      <Project>{027604ec-9601-484a-8e2d-8366492ece89}</Project>
+      <Name>yafn-interpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\yafn-parser\yafn-parser.csproj">
+      <Project>{3e507d93-42f7-42ec-b953-22bd574819be}</Project>
+      <Name>yafn-parser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

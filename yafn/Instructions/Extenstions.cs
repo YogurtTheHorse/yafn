@@ -1,4 +1,4 @@
-﻿namespace yafn.Instructions {
+﻿namespace Yafn.Instructions {
 	public static class Extenstions {
 		public static InstructionGroup GetGroup(this Instruction instruction) {
 			return (InstructionGroup)(((int)instruction) >> 4);
